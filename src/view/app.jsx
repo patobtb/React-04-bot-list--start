@@ -12,12 +12,12 @@ export function App() {
     async function getBots(){
       try {
         const url = "https://api.npoint.io/86690d80ff3d455133f0";
-        const response = fetch(url);
-        const data = (await response).json();
-        setBots(data);
+        const response = await fetch(url);
+        const data = await response.json();
+        setBots(data)
         setIsLoading(false)
       } catch (error) {
-        setError(`faild to fetch data ${error}`);
+        setError(`faild to fetch data ${error.message}`);
       }
     }
     getBots()
@@ -34,7 +34,6 @@ export function App() {
         <h1>Loading...</h1>
       ) : (
         <List botsList={bots}/>
-        
       )}
     </div>
   );
